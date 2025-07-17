@@ -193,7 +193,12 @@ void BinaryFilter::process(
     // Robot went out of mask range. Set "false" state by-default
     RCLCPP_WARN(
       logger_,
-      "BinaryFilter: Robot is outside of filter mask. Resetting binary state to default.");
+      "\033[36mBinaryFilter: Robot is outside of filter mask. Resetting binary state to default.\033[0m");
+
+
+    // RCLCPP_WARN(
+    //   logger_,
+    //   "BinaryFilter: Robot is outside of filter mask. Resetting binary state to default.");
     changeState(default_state_);
     return;
   }
@@ -220,10 +225,20 @@ void BinaryFilter::process(
     }
   }
 
-  
-  RCLCPP_WARN( logger_, "BinaryFilter: Processed mask_data: %d, binary_state: %d, flip_threshold: %.2f",
+  RCLCPP_WARN(
+    logger_,
+    "\033[35mBinaryFilter: Processed mask_data: %d, binary_state: %d, flip_threshold: %.2f\033[0m",
     mask_data, binary_state_, flip_threshold_);
-  RCLCPP_WARN(logger_, "BinaryFilter DEBUG: base_ = %.2f, multiplier_ = %.2f, expression = %.2f", base_, multiplier_, base_ + mask_data * multiplier_);
+
+  RCLCPP_WARN(
+    logger_,
+    "\033[35mBinaryFilter DEBUG: base_ = %.2f, multiplier_ = %.2f, expression = %.2f\033[0m",
+    base_, multiplier_, base_ + mask_data * multiplier_);
+
+  
+  // RCLCPP_WARN( logger_, "BinaryFilter: Processed mask_data: %d, binary_state: %d, flip_threshold: %.2f",
+  //   mask_data, binary_state_, flip_threshold_);
+  // RCLCPP_WARN(logger_, "BinaryFilter DEBUG: base_ = %.2f, multiplier_ = %.2f, expression = %.2f", base_, multiplier_, base_ + mask_data * multiplier_);
 
 }
 
@@ -231,7 +246,12 @@ void BinaryFilter::resetFilter()
 {
   std::lock_guard<CostmapFilter::mutex_t> guard(*getMutex());
 
-  RCLCPP_INFO(logger_, "BinaryFilter: Resetting the filter to default state");
+  RCLCPP_INFO(
+  logger_,
+  "\033[34mBinaryFilter: Resetting the filter to default state\033[0m");
+
+
+  // RCLCPP_INFO(logger_, "BinaryFilter: Resetting the filter to default state");
   changeState(default_state_);
 
   filter_info_sub_.reset();
@@ -256,9 +276,17 @@ void BinaryFilter::changeState(const bool state)
 {
   binary_state_ = state;
   if (state) {
-    RCLCPP_INFO(logger_, "BinaryFilter: Switched on");
+    // RCLCPP_INFO(logger_, "BinaryFilter: Switched on");
+    RCLCPP_INFO(
+  logger_,
+  "\033[32mBinaryFilter: Switched on\033[0m");
+
   } else {
-    RCLCPP_INFO(logger_, "BinaryFilter: Switched off");
+    // RCLCPP_INFO(logger_, "BinaryFilter: Switched off");
+    RCLCPP_INFO(
+  logger_,
+  "\033[32mBinaryFilter: Switched off\033[0m");
+
   }
 
   // Forming and publishing new BinaryState message
