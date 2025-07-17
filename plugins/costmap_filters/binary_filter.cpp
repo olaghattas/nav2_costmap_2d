@@ -223,6 +223,7 @@ void BinaryFilter::process(
   
   RCLCPP_WARN( logger_, "BinaryFilter: Processed mask_data: %d, binary_state: %d, flip_threshold: %.2f",
     mask_data, binary_state_, flip_threshold_);
+  RCLCPP_WARN(logger_, "BinaryFilter DEBUG: base_ = %.2f, multiplier_ = %.2f, expression = %.2f", base_, multiplier_, base_ + mask_data * multiplier_);
 
 }
 
