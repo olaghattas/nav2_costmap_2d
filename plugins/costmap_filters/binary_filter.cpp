@@ -229,7 +229,7 @@ void BinaryFilter::resetFilter()
   std::lock_guard<CostmapFilter::mutex_t> guard(*getMutex());
 
   RCLCPP_INFO(logger_, "BinaryFilter: Resetting the filter to default state");
-  // changeState(default_state_);
+  changeState(binary_state_);
 
   filter_info_sub_.reset();
   mask_sub_.reset();
